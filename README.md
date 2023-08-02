@@ -7,28 +7,73 @@ make](https://www.gnu.org/software/make/).
 The latest Docker image can be found on [Docker Hub](https://cloud.docker.com),
 [here](https://cloud.docker.com/repository/docker/frankhjung/pandoc/general).
 
+## Login
+
+```bash
+echo [token] | docker login -u frankhjung --password-stdin
+```
+
+## Build
+
+```bash
+docker build --compress --rm --tag frankhjung/pandoc:latest .
+```
+
 ## Run
 
 ```bash
 docker run frankhjung/pandoc:latest
 ```
 
+## Tag
+
+Get version from run to set tag:
+
+```bash
+export VERSION=2.17.1.1
+```
+
+```bash
+docker tag frankhjung/pandoc:latest frankhjung/pandoc:${VERSION}
+```
+
+Verify with:
+
+```bash
+docker image inspect --format='{{json .Config.Labels}}' frankhjung/pandoc:latest
+{"2.17.1.1":"","maintainer":"frankhjung"}
+```
+
 ### Example
 
+```text
+$ docker run frankhjung/pandoc:latest
+pandoc 2.17.1.1
+Compiled with pandoc-types 1.22.2.1, texmath 0.12.4, skylighting 0.12.3.1,
+citeproc 0.6.0.1, ipynb 0.2
+User data directory: /root/.local/share/pandoc
+Copyright (C) 2006-2022 John MacFarlane. Web:  https://pandoc.org
+This is free software; see the source for copying conditions. There is no
+warranty, not even for merchantability or fitness for a particular purpose.
+
 ```
-Unable to find image 'frankhjung/pandoc:latest' locally
-latest: Pulling from frankhjung/pandoc
-eafd24d25890: Already exists
-8315833a2172: Pull complete
-859e0547fad1: Pull complete
-Digest: sha256:2afd53035ef9eda90bce49a9669898cb57bdb84e76dcaa432a14fa5115a043a9
-Status: Downloaded newer image for frankhjung/pandoc:latest
-pandoc 2.2.1
-Compiled with pandoc-types 1.17.5.1, texmath 0.11.1, skylighting 0.7.5
-Default user data directory: /root/.pandoc
-Copyright (C) 2006-2018 John MacFarlane
-Web:  http://pandoc.org
-This is free software; see the source for copying conditions.
-There is no warranty, not even for merchantability or fitness
-for a particular purpose.
+
+## Push
+
+Push image and all tags to Docker Hub:
+
+```bash
+docker push -a frankhjung/pandoc
 ```
+
+## Pipeline
+
+The pipeline requires the following secret environment values:
+
+- `DOCKERHUB_TOKEN`
+- `DOCKERHUB_USERNAME`
+
+## Links
+
+* [Docker: Debian](https://hub.docker.com/_/debian)
+* [Pandoc](https://pandoc.org/)
