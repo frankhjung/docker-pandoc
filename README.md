@@ -5,7 +5,14 @@ using [Pandoc](https://pandoc.org). This includes [GNU
 make](https://www.gnu.org/software/make/).
 
 The latest Docker image can be found on [Docker Hub](https://cloud.docker.com),
-[here](https://cloud.docker.com/repository/docker/frankhjung/pandoc/general).
+[frankhjung/pandoc](https://cloud.docker.com/repository/docker/frankhjung/pandoc/general).
+
+## Pandoc Versions
+
+To check the available Pandoc versions, check the package list for Debian the
+release. For example, Trixie (13.3): uses the
+[Pandoc 3.1.11-1
+package](https://packages.debian.org/search?suite=trixie&searchon=names&keywords=pandoc).
 
 ## Login
 
@@ -75,5 +82,5 @@ The pipeline requires the following secret environment values:
 
 ## Links
 
-* [Docker: Debian](https://hub.docker.com/_/debian)
-* [Pandoc](https://pandoc.org/)
+- [Docker: Debian](https://hub.docker.com/_/debian)
+- [Pandoc](https://pandoc.org/)
