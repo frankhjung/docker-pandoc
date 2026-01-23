@@ -5,7 +5,9 @@ using [Pandoc](https://pandoc.org). This includes [GNU
 make](https://www.gnu.org/software/make/).
 
 The latest Docker image can be found on [Docker Hub](https://cloud.docker.com),
-[frankhjung/pandoc](https://cloud.docker.com/repository/docker/frankhjung/pandoc/general).
+[frankhjung/pandoc](https://cloud.docker.com/repository/docker/frankhjung/pandoc/general),
+or on [GitHub Container Registry](https://ghcr.io),
+[ghcr.io/frankhjung/docker-pandoc](https://github.com/frankhjung/docker-pandoc/pkgs/container/docker-pandoc).
 
 ## Pandoc Versions
 
@@ -75,10 +77,14 @@ docker push -a frankhjung/pandoc
 
 ## Pipeline
 
-The pipeline requires the following secret environment values:
+The Docker Hub pipeline (`.github/workflows/docker.yml`) requires the following secret environment values:
 
 - `DOCKERHUB_TOKEN`
 - `DOCKERHUB_USERNAME`
+
+The GHCR pipeline (`.github/workflows/ghcr.yml`) requires the following secret environment value:
+
+- `GH_PAT` - GitHub Personal Access Token with `write:packages` permission
 
 ## Links
 
