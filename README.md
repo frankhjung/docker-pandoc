@@ -8,6 +8,9 @@ The latest Docker image can be found on [Docker Hub](https://cloud.docker.com),
 [frankhjung/pandoc](https://cloud.docker.com/repository/docker/frankhjung/pandoc/general),
 or on [GitHub Container Registry](https://ghcr.io),
 [ghcr.io/frankhjung/docker-pandoc](https://github.com/frankhjung/docker-pandoc/pkgs/container/docker-pandoc).
+[frankhjung/pandoc](https://cloud.docker.com/repository/docker/frankhjung/pandoc/general),
+or on [GitHub Container Registry](https://ghcr.io),
+[ghcr.io/frankhjung/docker-pandoc](https://github.com/frankhjung/docker-pandoc/pkgs/container/docker-pandoc).
 
 ## Pandoc Versions
 
@@ -133,6 +136,10 @@ repository secrets:
 
 - `DOCKERHUB_TOKEN`
 - `DOCKERHUB_USERNAME`
+
+The GHCR pipeline (`.github/workflows/ghcr.yml`) requires the following secret environment value:
+
+- `GH_PAT` - GitHub Personal Access Token with `write:packages` permission
 
 The GHCR pipeline (`.github/workflows/ghcr.yml`) requires the following
 repository secret:

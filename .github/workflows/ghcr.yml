@@ -1,11 +1,12 @@
 ---
-name: Build and Push Docker Image to GitHub Container Registry (GHCR)
+
+name: Build and Push Docker Image to GHCR
 
 # yamllint disable-line rule:truthy
 on:
   push:
     branches: ["master"]
-    tags-ignore: ["*"]
+    tags-ignore: ['*']
   check_run:
     types: [rerequested, requested_action]
   pull_request:
@@ -13,14 +14,13 @@ on:
 # yamllint enable
 
 jobs:
+
   ghcr:
+
     runs-on: ubuntu-latest
 
-    permissions:
-      contents: read
-      packages: write
-
     steps:
+
       - name: checkout
         uses: actions/checkout@v4
 
@@ -35,12 +35,12 @@ jobs:
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          password: ${{ secrets.GH_PAT }}
 
       - name: build and push
         uses: docker/build-push-action@v5
         with:
           push: true
           tags: |
-            ghcr.io/${{ github.repository }}:3.1.11.1
-            ghcr.io/${{ github.repository }}:latest
+             ghcr.io/${{ github.repository }}:3.1.11.1
+             ghcr.io/${{ github.repository }}:latest
