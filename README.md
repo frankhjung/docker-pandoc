@@ -4,13 +4,10 @@ A [Debian](https://hub.docker.com/_/debian)-based image for building documents
 using [Pandoc](https://pandoc.org). This includes [GNU
 make](https://www.gnu.org/software/make/).
 
-The latest Docker image can be found on [Docker Hub](https://cloud.docker.com),
-[frankhjung/pandoc](https://cloud.docker.com/repository/docker/frankhjung/pandoc/general),
-or on [GitHub Container Registry](https://ghcr.io),
-[ghcr.io/frankhjung/docker-pandoc](https://github.com/frankhjung/docker-pandoc/pkgs/container/docker-pandoc).
-[frankhjung/pandoc](https://cloud.docker.com/repository/docker/frankhjung/pandoc/general),
-or on [GitHub Container Registry](https://ghcr.io),
-[ghcr.io/frankhjung/docker-pandoc](https://github.com/frankhjung/docker-pandoc/pkgs/container/docker-pandoc).
+The latest Docker image can be found on:
+
+- [Docker Hub](https://hub.docker.com/r/frankhjung/pandoc): `frankhjung/pandoc:latest`
+- [GitHub Container Registry](https://github.com/frankhjung/docker-pandoc/pkgs/container/pandoc): `ghcr.io/frankhjung/pandoc:latest`
 
 ## Pandoc Versions
 
@@ -18,16 +15,76 @@ To check available Pandoc versions, refer to the package list for the Debian
 release. For example, Trixie (13.3) uses the [Pandoc 3.1.11-1
 package](https://packages.debian.org/search?suite=trixie&searchon=names&keywords=pandoc).
 
+## Updating the Pandoc Version
+
+The Pandoc version is managed via a GitHub repository variable `PANDOC_VERSION`.
+
+To update the version:
+
+1. Go to the repository's Settings → Secrets and variables → Actions → Variables
+2. Update the `PANDOC_VERSION` variable to the desired version (e.g., `3.1.11.1`)
+3. The next workflow run will automatically build and tag images with the new version
+
+## Using the Docker Image
+
+### Docker Hub
+
+Pull and run the latest image from Docker Hub:
+
+```bash
+docker pull frankhjung/pandoc:latest
+docker run frankhjung/pandoc:latest
+```
+
+Or use a specific version:
+
+```bash
+docker pull frankhjung/pandoc:3.1.11.1
+docker run frankhjung/pandoc:3.1.11.1
+```
+
+### GitHub Container Registry
+
+Pull and run the latest image from GHCR:
+
+```bash
+docker pull ghcr.io/frankhjung/pandoc:latest
+docker run ghcr.io/frankhjung/pandoc:latest
+```
+
+Or use a specific version:
+
+```bash
+docker pull ghcr.io/frankhjung/pandoc:3.1.11.1
+docker run ghcr.io/frankhjung/pandoc:3.1.11.1
+```
+
 ## Login
+
+For Docker Hub:
 
 ```bash
 echo [token] | docker login -u frankhjung --password-stdin
 ```
 
+For GitHub Container Registry:
+
+```bash
+echo [token] | docker login ghcr.io -u frankhjung --password-stdin
+```
+
 ## Build
+
+Build the image locally:
 
 ```bash
 docker build --compress --rm --tag frankhjung/pandoc:latest .
+```
+
+Build with a specific Pandoc version:
+
+```bash
+docker build --build-arg PANDOC_VERSION=3.1.11.1 --compress --rm --tag frankhjung/pandoc:3.1.11.1 .
 ```
 
 ## Run
@@ -38,10 +95,21 @@ docker run frankhjung/pandoc:latest
 
 ## Tag
 
+### Tagging Images
+
+The GitHub Actions workflows automatically tag images with both the version number and `latest`:
+
+- `frankhjung/pandoc:3.1.11.1` (version-specific)
+- `frankhjung/pandoc:latest` (latest build)
+- `ghcr.io/frankhjung/pandoc:3.1.11.1` (version-specific)
+- `ghcr.io/frankhjung/pandoc:latest` (latest build)
+
+### Manual Tagging
+
 Get the version from the run output to set the tag:
 
 ```bash
-export VERSION=2.17.1.1
+export VERSION=3.1.11.1
 ```
 
 ```bash
@@ -52,7 +120,6 @@ Verify with:
 
 ```bash
 docker image inspect --format='{{json .Config.Labels}}' frankhjung/pandoc:latest
-{"2.17.1.1":"","maintainer":"frankhjung"}
 ```
 
 ### Example

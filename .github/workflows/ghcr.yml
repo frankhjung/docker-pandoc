@@ -2,6 +2,9 @@
 
 name: Build and Push Docker Image to GHCR
 
+env:
+  PANDOC_VERSION: ${{ vars.PANDOC_VERSION }}
+
 # yamllint disable-line rule:truthy
 on:
   push:
@@ -45,6 +48,8 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           push: true
+          build-args: |
+            PANDOC_VERSION=${{ env.PANDOC_VERSION }}
           tags: |
-             ghcr.io/${{ github.repository }}:3.1.11.1
-             ghcr.io/${{ github.repository }}:latest
+            ghcr.io/frankhjung/pandoc:${{ vars.PANDOC_VERSION }}
+            ghcr.io/frankhjung/pandoc:latest
