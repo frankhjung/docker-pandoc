@@ -1,5 +1,6 @@
 ARG PANDOC_VERSION=3.1.11.1
 FROM debian:stable-slim
+# Re-declare ARG after FROM to make it available in the build stage
 ARG PANDOC_VERSION
 LABEL maintainer=frankhjung@linux.com
 LABEL version="${PANDOC_VERSION}"

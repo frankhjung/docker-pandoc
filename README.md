@@ -17,13 +17,16 @@ package](https://packages.debian.org/search?suite=trixie&searchon=names&keywords
 
 ## Updating the Pandoc Version
 
-The Pandoc version is managed via a GitHub repository variable `PANDOC_VERSION`.
+The Pandoc version is managed via a GitHub repository variable `PANDOC_VERSION`. This should match the Debian package version available in the stable repository.
 
 To update the version:
 
-1. Go to the repository's Settings → Secrets and variables → Actions → Variables
-2. Update the `PANDOC_VERSION` variable to the desired version (e.g., `3.1.11.1`)
-3. The next workflow run will automatically build and tag images with the new version
+1. Check the available Pandoc version in the [Debian package repository](https://packages.debian.org/search?suite=stable&searchon=names&keywords=pandoc)
+2. Go to the repository's Settings → Secrets and variables → Actions → Variables
+3. Update the `PANDOC_VERSION` variable to match the Debian package version (e.g., `3.1.11.1`)
+4. The next workflow run will automatically build and tag images with the new version
+
+Note: The version label on the Docker image reflects the Debian package version, which is installed via `apt-get`.
 
 ## Using the Docker Image
 
