@@ -8,6 +8,6 @@ LABEL org.opencontainers.image.source="https://github.com/frankhjung/docker-pand
 RUN export TERM=xterm \
  && apt-get --assume-yes --list-cleanup update \
  && apt-get --yes --no-install-recommends install make pandoc \
- && apt-get --yes install texlive-latex-base texlive-latex-recommended
+ && apt-get --yes install texlive-latex-base texlive-latex-recommended texlive-xetex
 WORKDIR /opt/workspace
 CMD ["/usr/bin/pandoc", "--version"]
